@@ -4,3 +4,5 @@ Uses launchd's launch plists to run packaged binary, no node install needed.
 
 Highly unstable. If the site changes their layout (and/or url) consider this broken.
 
+All you have to do is pull and run apod.nex.
+
