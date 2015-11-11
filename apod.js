@@ -81,24 +81,28 @@ var writePlist = function () {
     var home_dir = process.env.HOME;
     var filepath = home_dir + "/Library/LaunchAgents/apod.sleepwatcher.plist";
 
+    if (fs.existsSync(filepath)) {
+        return;
+    }
+
     var plist = "<?xml version='1.0' encoding='UTF-8'?>\n\
                  <!DOCTYPE plist PUBLIC '-//Apple Computer//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>\n\
-                 <plist version='1.0'>\n\
-                 <dict>\n\
-                 <key>Label</key>\n\
-                 <string>apod.sleepwatcher</string>\n\
-                 <key>ProgramArguments</key>\n\
-                 <array>\n\
-                 <string>" + __dirname + "/sleepwatcher_2.2/sleepwatcher</string>\n\
-                 <string>-V</string>\n\
-                 <string>-w " + __dirname + "/apod.nex </string>\n\
-                 </array>\n\
-                 <key>RunAtLoad</key>\n\
-                 <true/>\n\
-                 <key>KeepAlive</key>\n\
-                 <true/>\n\
-                 </dict>\n\
-                 </plist>\n";
+                <plist version='1.0'>\n\
+                    <dict>\n\
+                        <key>Label</key>\n\
+                        <string>apod.sleepwatcher</string>\n\
+                        <key>ProgramArguments</key>\n\
+                        <array>\n\
+                            <string>" + __dirname + "/sleepwatcher_2.2/sleepwatcher</string>\n\
+                            <string>-V</string>\n\
+                            <string>-w " + __dirname + "/apod.nex </string>\n\
+                        </array>\n\
+                        <key>RunAtLoad</key>\n\
+                        <true/>\n\
+                        <key>KeepAlive</key>\n\
+                        <true/>\n\
+                    </dict>\n\
+                </plist>\n";
 
     fs.outputFile(filepath, plist, function (err) {
         if (err) return logError(err);
